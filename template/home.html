@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shikhbo E-Learning Platform</title>
+    <title>Shikhbo - E-Learning Platform</title>
+    {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 <body>
-    
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="#">sikhbo.io</a>
@@ -23,313 +24,161 @@
         </div>
     </nav>
 
-    
-    <section class="Heading text-center my-5">
+    <!-- Hero Section -->
+    <header class="py-5 text-center bg-light">
         <div class="container">
-            <h1>Learn On Your Own, Build Confidence!</h1>
-            <p>Sikhbo's career track courses are enough to prepare yourself for employment or freelancing.</p>
-            <a href="#" class="btn btn-primary">View The Courses</a>
+            <h1 class="display-4">Learn On Your Own, Build Confidence!</h1>
+            <p class="lead">Shikhbo’s career track courses are enough to prepare yourself for employment or freelancing.</p>
+            <a href="#" class="btn btn-primary btn-lg">View The Courses</a>
         </div>
-    </section>
+    </header>
 
-    <!-- Category Section -->
-
-    <section class="course-categories text-center py-5">
+    <!-- What do you want to learn section -->
+    <section class="py-5 text-center">
         <div class="container">
-            <h2>What do you want to learn?</h2>
+            <h2 class="mb-4">What do you want to learn?</h2>
             <div class="row">
-                
-                <div class="col-lg-3 col-md-6 my-3">
-                    <div class="card">
-                        <img src="path/to/image.jpg" class="card-img-top" alt="Career Skills">
-                        <div class="card-body">
-                            <h5 class="card-title">Career Skills</h5>
+                {% if categories %}
+                    {% for category in categories %}
+                    <div class="col-md-3">
+                        <button class="btn btn-light text-center w-100">
+                            {% if category.icon %}
+                                <img src="{{ category.icon.url }}" alt="{{ category.name }}" class="img-fluid mb-2">
+                            {% else %}
+                                <img src="{% static 'images/default-icon.png' %}" alt="{{ category.name }}" class="img-fluid mb-2">
+                            {% endif %}
+                            <h5>{{ category.name }}</h5>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No categories available.</p>
+                {% endif %}
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Career Track Courses Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Career Track Courses</h2>
+                <a href="#" class="btn btn-primary">See All</a>
+            </div>
+            <div class="row">
+                {% if career_courses %}
+                    {% for course in career_courses %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <button class="btn btn-light text-center w-100">
+                            <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ course.title }}</h5>
+                                <p class="card-text">৳ {{ course.price }}</p>
+                                <p class="card-text">Enrolled: {{ course.students_enrolled }}</p>
+                            </div>
+                        </button>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 my-3">
-                    <div class="card">
-                        <img src="path/to/image.jpg" class="card-img-top" alt="Career Skills">
-                        <div class="card-body">
-                            <h5 class="card-title">Free Courses</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 my-3">
-                    <div class="card">
-                        <img src="path/to/image.jpg" class="card-img-top" alt="Career Skills">
-                        <div class="card-body">
-                            <h5 class="card-title">Product Management</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 my-3">
-                    <div class="card">
-                        <img src="path/to/image.jpg" class="card-img-top" alt="Career Skills">
-                        <div class="card-body">
-                            <h5 class="card-title">Web and App Development</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 my-3">
-                    <div class="card">
-                        <img src="path/to/image.jpg" class="card-img-top" alt="Career Skills">
-                        <div class="card-body">
-                            <h5 class="card-title">Computer Science and Programming</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 my-3">
-                    <div class="card">
-                        <img src="path/to/image.jpg" class="card-img-top" alt="Career Skills">
-                        <div class="card-body">
-                            <h5 class="card-title">Digital Marketing</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 my-3">
-                    <div class="card">
-                        <img src="path/to/image.jpg" class="card-img-top" alt="Career Skills">
-                        <div class="card-body">
-                            <h5 class="card-title">Data Science and Analysis</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 my-3">
-                    <div class="card">
-                        <img src="path/to/image.jpg" class="card-img-top" alt="Career Skills">
-                        <div class="card-body">
-                            <h5 class="card-title">Software and Tools</h5>
-                        </div>
-                    </div>
-                </div>
-                
+                    {% endfor %}
+                {% else %}
+                    <p>No Career Track courses available.</p>
+                {% endif %}
             </div>
         </div>
     </section>
-    <!-- Category Section End-->
 
-    
-    <!-- Career Track Course Section -->
-<section class="career-track py-5">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Career track course</h2>
-            <a href="#" class="btn btn-primary">See All</a>
-        </div>
-        <div id="careerTrackCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row">
-                        <!-- Course 1 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image1.jpg" class="card-img-top" alt="Digital Marketing">
-                                <div class="card-body">
-                                    <h5 class="card-title">Digital Marketing</h5>
-                                    <p class="card-text">7000+</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Course 2 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image2.jpg" class="card-img-top" alt="Digital Product Management">
-                                <div class="card-body">
-                                    <h5 class="card-title">Digital Product Management</h5>
-                                    <p class="card-text">6000+</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Course 3 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image3.jpg" class="card-img-top" alt="Full Stack Web Development">
-                                <div class="card-body">
-                                    <h5 class="card-title">Full Stack Web Development</h5>
-                                    <p class="card-text">7500+</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Course 4 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image4.jpg" class="card-img-top" alt="Data Analytics">
-                                <div class="card-body">
-                                    <h5 class="card-title">Data Analytics</h5>
-                                    <p class="card-text">6500+</p>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Creative Learning Section -->
+        <section class="py-5 text-center">
+            <div class="container">
+                <h2 class="mb-3">Creative Learning <span class="text-primary">Made Easy</span></h2>
+                <ul class="list-unstyled mb-4">
+                    <li>✔️ Thousand of creative classes. Beginner to pro.</li>
+                    <li>✔️ Taught by creative pros and industry icons.</li>
+                    <li>✔️ Learning paths to help you achieve your goals.</li>
+                    <li>✔️ Certificates to celebrate your accomplishment.</li>
+                </ul>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h3>369k+</h3>
+                        <p>Total Enrollment</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h3>269k+</h3>
+                        <p>Number Of Students</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h3>11k+</h3>
+                        <p>Total Videos</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h3>55</h3>
+                        <p>Courses And Career Tracks</p>
                     </div>
                 </div>
-
-
-
             </div>
+        </section>
 
-
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#careerTrackCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#careerTrackCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-</section>
-    <!-- Career Track Course Section End -->
-
-
-    <!-- Fundation  Course Section -->
-<section class="fundation-course py-5">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Foundation Course</h2>
-            <a href="#" class="btn btn-primary">See All</a>
-        </div>
-        <div id="fundationCourseCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row">
-                        <!-- Course 1 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image1.jpg" class="card-img-top" alt="Art of Job Searching & Applications">
-                                <div class="card-body">
-                                    <h5 class="card-title">Art of Job Searching & Applications</h5>
-                                    <p class="card-text">Free Course</p>
-                                </div>
+    <!-- Foundation Courses Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Foundation Courses</h2>
+                <a href="#" class="btn btn-primary">See All</a>
+            </div>
+            <div class="row">
+                {% if foundation_courses %}
+                    {% for course in foundation_courses %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <button class="btn btn-light text-center w-100">
+                            <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ course.title }}</h5>
+                                <p class="card-text">৳ {{ course.price }}</p>
+                                <p class="card-text">Enrolled: {{ course.students_enrolled }}</p>
                             </div>
-                        </div>
-                        <!-- Course 2 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image2.jpg" class="card-img-top" alt="Elevate Your Public Speaking">
-                                <div class="card-body">
-                                    <h5 class="card-title">Elevate Your Public Speaking</h5>
-                                    <p class="card-text">Free Course</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Course 3 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image3.jpg" class="card-img-top" alt="Excellence with Excel">
-                                <div class="card-body">
-                                    <h5 class="card-title">Excellence with Excel</h5>
-                                    <p class="card-text">1500+</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Course 4 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image4.jpg" class="card-img-top" alt="Introduction to Data Analysis">
-                                <div class="card-body">
-                                    <h5 class="card-title">Introduction to Data Analysis    </h5>
-                                    <p class="card-text">Free Course</p>
-                                </div>
-                            </div>
+                        </button>
                         </div>
                     </div>
-                </div>
-
-
-                
+                    {% endfor %}
+                {% else %}
+                    <p>No Foundation courses available.</p>
+                {% endif %}
             </div>
-
-
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#careerTrackCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#careerTrackCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
-    </div>
-</section>
-    <!-- Foundation Course Section End -->
+    </section>
 
-
-    <!-- Free  Course Section -->
-<section class="free-course py-5">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Free Course</h2>
-            <a href="#" class="btn btn-primary">See All</a>
-        </div>
-        <div id="freeCourseCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row">
-                        <!-- Course 1 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image1.jpg" class="card-img-top" alt="Pathway to Software Engineering">
-                                <div class="card-body">
-                                    <h5 class="card-title">Pathway to Software Engineering</h5>
-                                    <p class="card-text">Free Course</p>
-                                </div>
+    <!-- Free Courses Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Free Courses</h2>
+                <a href="#" class="btn btn-primary">See All</a>
+            </div>
+            <div class="row">
+                {% if free_courses %}
+                    {% for course in free_courses %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <button class="btn btn-light text-center w-100">
+                            <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ course.title }}</h5>
+                                <p class="card-text">Free</p>
+                                <p class="card-text">Enrolled: {{ course.students_enrolled }}</p>
                             </div>
-                        </div>
-                        <!-- Course 2 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image2.jpg" class="card-img-top" alt="IELTS Academic and General Preparation">
-                                <div class="card-body">
-                                    <h5 class="card-title">IELTS Academic and General Preparation</h5>
-                                    <p class="card-text">Free Course</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Course 3 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image3.jpg" class="card-img-top" alt="Diversity, Tolerance & Pluralism">
-                                <div class="card-body">
-                                    <h5 class="card-title">Diversity, Tolerance & Pluralism</h5>
-                                    <p class="card-text">Free Course</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Course 4 -->
-                        <div class="col-md-3">
-                            <div class="card">
-                                <img src="path/to/image4.jpg" class="card-img-top" alt="PowerPoint Fundamentals">
-                                <div class="card-body">
-                                    <h5 class="card-title">PowerPoint Fundamentals</h5>
-                                    <p class="card-text">Free Course</p>
-                                </div>
-                            </div>
+                        </button>
                         </div>
                     </div>
-                </div>
-
-
-                
+                    {% endfor %}
+                {% else %}
+                    <p>No free courses available.</p>
+                {% endif %}
             </div>
-
-
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#careerTrackCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#careerTrackCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
-    </div>
-</section>
-    <!-- Free Course Section End -->
+    </section>
 
     <section class="Student Comment text-center py-5">
         <div class="container">
@@ -353,30 +202,11 @@
             </div>
         </div>
 
-    
-
-
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
+    <footer class="py-4 bg-dark text-white">
         <div class="container text-center">
-            <p>&copy; 2024 Sikhbo.io. All rights reserved.</p>
+            <p>&copy; {{ current_year }} Shikhbo.io. All rights reserved.</p>
         </div>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 </body>
 </html>
