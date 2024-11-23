@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Available Courses</h1>
+    <div class="courses-container">
+        {% for course in courses %}
+        <div class="course-card">
+            <h2>{{ course.title }}</h2>
+            <p><strong>Category:</strong> {{ course.category.name }}</p>
+            <p><strong>Price:</strong> ${{ course.price }}</p>
+            <p><strong>Enrolled:</strong> {{ course.students_enrolled }}</p>
+            {% if course.thumbnail %}
+            <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" style="width:100%;max-width:300px;">
+            {% endif %}
+            <a href="{% url 'course_details' course.id %}" class="details-button">View Details</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

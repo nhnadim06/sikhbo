@@ -18,6 +18,7 @@ class Course(models.Model):
     thumbnail = models.ImageField(upload_to='course_thumbnails/',null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,null=True)
     students_enrolled = models.PositiveIntegerField(default=0)
+    image=models.ImageField(upload_to='',blank=True,null=True)
     
     def __str__(self):
         return self.title

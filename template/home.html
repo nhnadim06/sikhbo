@@ -27,37 +27,19 @@
     <!-- Hero Section -->
     <header class="py-5 text-center bg-light">
         <div class="container">
-            <h1 class="display-4">Learn On Your Own, Build Confidence!</h1>
-            <p class="lead">Shikhbo’s career track courses are enough to prepare yourself for employment or freelancing.</p>
-            <a href="#" class="btn btn-primary btn-lg">View The Courses</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="display-4">Learn On Your Own,</h1>
+                    <h1 class="display-4">Build Confidence!</h1>
+                    <p class="lead">Shikhbo’s career track courses are enough to prepare yourself for employment or freelancing.</p>
+                    <a href="#" class="btn btn-primary btn-lg">View The Courses</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="" alt="Image description" class="img-fluid">
+                </div>
+            </div>
         </div>
     </header>
-
-    <!-- What do you want to learn section -->
-    <section class="py-5 text-center">
-        <div class="container">
-            <h2 class="mb-4">What do you want to learn?</h2>
-            <div class="row">
-                {% if categories %}
-                    {% for category in categories %}
-                    <div class="col-md-3">
-                        <button class="btn btn-light text-center w-100">
-                            {% if category.icon %}
-                                <img src="{{ category.icon.url }}" alt="{{ category.name }}" class="img-fluid mb-2">
-                            {% else %}
-                                <img src="{% static 'images/default-icon.png' %}" alt="{{ category.name }}" class="img-fluid mb-2">
-                            {% endif %}
-                            <h5>{{ category.name }}</h5>
-                        </button>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <p>No categories available.</p>
-                {% endif %}
-            </div>
-            
-        </div>
-    </section>
 
     <!-- Career Track Courses Section -->
     <section class="py-5 bg-light">
@@ -77,6 +59,14 @@
                                 <h5 class="card-title">{{ course.title }}</h5>
                                 <p class="card-text">৳ {{ course.price }}</p>
                                 <p class="card-text">Enrolled: {{ course.students_enrolled }}</p>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'upload_course'%}">Add Course</a></div>
+                                </div>
+                                <div>
+                                    <a href="{% url 'update_course' course.id %}" class="btn btn-primary">Update</a>
+                                    <a href="{% url 'delete_course' course.id %}" class="btn btn-primary">Delete</a>
+                                </div>
+
                             </div>
                         </button>
                         </div>
@@ -89,36 +79,7 @@
         </div>
     </section>
 
-        <!-- Creative Learning Section -->
-        <section class="py-5 text-center">
-            <div class="container">
-                <h2 class="mb-3">Creative Learning <span class="text-primary">Made Easy</span></h2>
-                <ul class="list-unstyled mb-4">
-                    <li>✔️ Thousand of creative classes. Beginner to pro.</li>
-                    <li>✔️ Taught by creative pros and industry icons.</li>
-                    <li>✔️ Learning paths to help you achieve your goals.</li>
-                    <li>✔️ Certificates to celebrate your accomplishment.</li>
-                </ul>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>369k+</h3>
-                        <p>Total Enrollment</p>
-                    </div>
-                    <div class="col-md-3">
-                        <h3>269k+</h3>
-                        <p>Number Of Students</p>
-                    </div>
-                    <div class="col-md-3">
-                        <h3>11k+</h3>
-                        <p>Total Videos</p>
-                    </div>
-                    <div class="col-md-3">
-                        <h3>55</h3>
-                        <p>Courses And Career Tracks</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
 
     <!-- Foundation Courses Section -->
     <section class="py-5">
@@ -138,6 +99,13 @@
                                 <h5 class="card-title">{{ course.title }}</h5>
                                 <p class="card-text">৳ {{ course.price }}</p>
                                 <p class="card-text">Enrolled: {{ course.students_enrolled }}</p>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'upload_course'%}">Add Course</a></div>
+                                </div>
+                                <div>
+                                    <a href="{% url 'update_course' course.id %}" class="btn btn-primary">Update</a>
+                                    <a href="{% url 'delete_course' course.id %}" class="btn btn-primary">Delete</a>
+                                </div>
                             </div>
                         </button>
                         </div>
@@ -168,6 +136,14 @@
                                 <h5 class="card-title">{{ course.title }}</h5>
                                 <p class="card-text">Free</p>
                                 <p class="card-text">Enrolled: {{ course.students_enrolled }}</p>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'upload_course'%}">Add Course</a></div>
+                                </div>
+                                <div>
+                                    <a href="{% url 'update_course' course.id %}" class="btn btn-primary">Update</a>
+                                    <a href="{% url 'delete_course' course.id %}" class="btn btn-primary">Delete</a>
+                                </div>
+
                             </div>
                         </button>
                         </div>
@@ -177,6 +153,66 @@
                     <p>No free courses available.</p>
                 {% endif %}
             </div>
+        </div>
+    </section>
+
+
+    <!-- Creative Learning Section -->
+    <section class="py-5 text-center">
+        <div class="container">
+            <h2 class="mb-3">Creative Learning <span class="text-primary">Made Easy</span></h2>
+            <ul class="list-unstyled mb-4">
+                <li>✔️ Thousand of creative classes. Beginner to pro.</li>
+                <li>✔️ Taught by creative pros and industry icons.</li>
+                <li>✔️ Learning paths to help you achieve your goals.</li>
+                <li>✔️ Certificates to celebrate your accomplishment.</li>
+            </ul>
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>369k+</h3>
+                    <p>Total Enrollment</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>269k+</h3>
+                    <p>Number Of Students</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>11k+</h3>
+                    <p>Total Videos</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>55</h3>
+                    <p>Courses And Career Tracks</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- What do you want to learn section -->
+    <section class="py-5 text-center">
+        <div class="container">
+            <h2 class="mb-4">What do you want to learn?</h2>
+            <div class="row">
+                {% if categories %}
+                    {% for category in categories %}
+                    <div class="col-md-3">
+                        <button class="btn btn-light text-center w-100">
+                            {% if category.icon %}
+                                <img src="{{ category.icon.url }}" alt="{{ category.name }}" class="img-fluid mb-2">
+                            {% else %}
+                                <img src="{% static 'images/default-icon.png' %}" alt="{{ category.name }}" class="img-fluid mb-2">
+                            {% endif %}
+                            <h5>{{ category.name }}</h5>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No categories available.</p>
+                {% endif %}
+            </div>
+            
         </div>
     </section>
 
@@ -201,6 +237,9 @@
             <div class="row">
             </div>
         </div>
+
+        
+
 
     <!-- Footer -->
     <footer class="py-4 bg-dark text-white">

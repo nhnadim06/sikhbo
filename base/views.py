@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from .models import Category, Course, Statistic, Instructor
+from django.shortcuts import render, redirect
+from .models import *
 import datetime  # Fixed: Moved import to the top
+from .forms import courseForm
+
 
 def views_home(request):
     # Fetch data from the models
@@ -38,3 +40,42 @@ def views_login(request):
 
 def views_courses(request):
     return render (request,"courses.html")  
+
+def course_details(request,id):
+    course = Course.objects.get(pk = id)
+    context = {
+        'course':course,
+    }
+    return render(request,template_name = 'course_details.html',context = context)
+
+def upload_course(request):
+   form = courseForm()
+   if request.method == 'POST':
+       form = courseForm(request.POST, request.FILES)
+       if form.is_valid():
+           form.save()
+           return redirect('home')
+   context = {'form':form}
+   return render(request, template_name = 'course_form.html', context= context)
+
+
+def update_course(request,id):
+   course = Course.objects.get(pk = id)
+   form = courseForm(instance = course)
+   if request.method == 'POST':
+       form = courseForm(request.POST, request.FILES,instance = course)
+       if form.is_valid():
+           form.save()
+           return redirect('home')
+   context = {'form':form}
+   return render(request, template_name = 'course_form.html', context= context)
+
+def delete_course(request,id):
+   course = Course.objects.get(pk=id)
+   if request.method == 'POST':
+       course.delete()
+       return redirect('home')
+   return render(request, template_name = 'delete_course.html')
+
+
+
