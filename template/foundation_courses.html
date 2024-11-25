@@ -1,9 +1,10 @@
+<!-- career_track_courses.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Courses - Shikhbo</title>
+    <title>Career Track Courses - Shikhbo</title>
     {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/courses.css' %}">
@@ -20,41 +21,27 @@
         </div>
     </nav>
 
-    <!-- Courses Section -->
+    <!-- Career Track Courses Section -->
     <section class="py-5">
         <div class="container">
-            <h1 class="mb-4 text-center">Online Courses</h1>
-            <br>
-            <p class="mb-4 text-center">Choose the course of your choice and become self-reliant by acquiring skills.</p>
+            <h1 class="mb-4 text-center">Foundation Courses</h1>
             <div class="row">
-                {% if courses %}
-                    {% for course in courses %}
+                {% if foundation_courses %}
+                    {% for course in foundation_courses %}
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
                             <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ course.title }}</h5>
-                                <p class="card-text">
-                                    {% if course.price > 0 %}
-                                        ৳ {{ course.price }}
-                                    {% else %}
-                                        Free
-                                    {% endif %}
-                                </p>
+                                <p class="card-text">৳ {{ course.price }}</p>
                                 <p class="card-text">Enrolled: {{ course.students_enrolled }}</p>
-                                <a href="#" class="btn btn-primary">
-                                    {% if course.price > 0 %}
-                                        Enroll Now
-                                    {% else %}
-                                        Start Now
-                                    {% endif %}
-                                </a>
+                                <a href="#" class="btn btn-primary">Enroll Now</a>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
                 {% else %}
-                    <p class="text-center">No courses available at the moment. Please check back later.</p>
+                    <p class="text-center">No Career Track courses available at the moment. Please check back later.</p>
                 {% endif %}
             </div>
         </div>

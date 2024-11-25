@@ -1,11 +1,28 @@
-
 {% load static %}
-<!-- Navigation-->
+<!-- Link to your CSS file -->
+<link rel="stylesheet" href="{% static 'css/delete_course.css' %}">
+
 {% block content %}
-<p> Are you sure, you want to delete this product? </p>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <a href="{% url 'home' %}" class="btn btn-warning">NO</a>
-    <input type="submit" name = "Submit" class="btn btn-success">
-</form>
+<!-- Wrapper Section for Centering -->
+<div class="delete-course-wrapper">
+    <!-- Delete Confirmation Container -->
+    <div class="delete-course-container">
+        <!-- Heading -->
+        <h2>Delete Course</h2>
+        <!-- Confirmation Message -->
+        <p class="confirmation-message">Are you sure you want to delete this course?</p>
+        
+        <!-- Form with Buttons -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="btn-container">
+                <!-- No Button (Redirect to Home) -->
+                <a href="{% url 'home' %}" class="btn btn-warning">NO</a>
+                <!-- Submit Button (Confirm Deletion) -->
+                <input type="submit" name="Submit" class="btn btn-success" value="YES, Delete">
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

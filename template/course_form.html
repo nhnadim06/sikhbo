@@ -2,6 +2,9 @@
 {% load static %}
 {% block content %}
 
+{% load static %}
+<!-- Link to your CSS file -->
+<link rel="stylesheet" href="{% static 'css/course_form.css' %}">
 <form method = "POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.as_p}}

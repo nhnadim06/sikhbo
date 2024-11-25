@@ -27,11 +27,15 @@ from base import views as base_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', base_views.views_home,name="home"),
-    path('course/<str:id>',base_views.course_details, name = 'course_details'),
+    path('course_details/<str:id>',base_views.course_details, name = 'course_details'),
     path('upload_course/',base_views.upload_course,name='upload_course'),
     path('update_course/<str:id>',base_views.update_course,name = 'update_course'),
     path('delete_course/<str:id>',base_views.delete_course,name = 'delete_course'),
     path('signup/', base_views.views_signup,name="signup"),
     path('login/', base_views.views_login,name="login"),
-    path('courses/', base_views.views_courses,name="courses"),
+    path('courses/', base_views.courses,name="courses"),
+
+    path('career-track-courses/', base_views.career_track_courses, name='career_track_courses'),
+    path('foundation-courses/', base_views.foundation_courses, name='foundation_courses'),
+    path('free-courses/', base_views.free_courses, name='free_courses'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

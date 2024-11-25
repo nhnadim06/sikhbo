@@ -3,24 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Courses Details</title>
+    
+    {% load static %}
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{% static 'css/course_details.css' %}">
 </head>
 <body>
-    <h1>Available Courses</h1>
-    <div class="courses-container">
-        {% for course in courses %}
-        <div class="course-card">
-            <h2>{{ course.title }}</h2>
-            <p><strong>Category:</strong> {{ course.category.name }}</p>
-            <p><strong>Price:</strong> ${{ course.price }}</p>
-            <p><strong>Enrolled:</strong> {{ course.students_enrolled }}</p>
-            {% if course.thumbnail %}
-            <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" style="width:100%;max-width:300px;">
-            {% endif %}
-            <a href="{% url 'course_details' course.id %}" class="details-button">View Details</a>
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- Course Details -->
+                    <div class="card mb-4">
+                        <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
+                        <div class="card-body">
+                            <h2 class="card-title">{{ course.title }}</h2>
+                            <p class="card-text">{{ course.description }}</p>
+                            <p class="card-text">Price: ৳ {{ course.price }}</p>
+                            <p class="card-text">Enrolled Students: {{ course.students_enrolled }}</p>
+                            <p class="card-text">Instructor: {{ course.instructor.name }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Enroll Button -->
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Enroll Now</a>
+                    </div>
+
+                    <!-- Update or Delete Buttons -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'update_course' course.id %}" class="btn btn-primary">Update Course</a>
+                        <a href="{% url 'delete_course' course.id %}" class="btn btn-danger">Delete Course</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!-- Sidebar or Related Courses (optional) -->
+                    <h4>Related Courses</h4>
+                    <ul>
+                        {% for related_course in related_courses %}
+                        <li><a href="{% url 'course_details' related_course.id %}">{{ related_course.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
-        {% endfor %}
-    </div>
+    </section>
 </body>
 </html>

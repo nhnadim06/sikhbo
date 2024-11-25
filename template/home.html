@@ -18,8 +18,8 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <div>
-                <a href="#" class="btn btn-link">Log In</a>
-                <a href="#" class="btn btn-primary">Sign Up</a>
+                <a href="login/" class="btn btn-link">Log In</a>
+                <a href="signup/" class="btn btn-primary">Sign Up</a>
             </div>
         </div>
     </nav>
@@ -28,14 +28,18 @@
     <header class="py-5 text-center bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 text-start">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <h1 class="display-4">Learn On Your Own,</h1>
                     <h1 class="display-4">Build Confidence!</h1>
                     <p class="lead">Shikhbo’s career track courses are enough to prepare yourself for employment or freelancing.</p>
-                    <a href="#" class="btn btn-primary btn-lg">View The Courses</a>
+                    <a href="courses/" class="btn btn-primary btn-lg">View The Courses</a>
                 </div>
                 <div class="col-md-6">
-                    <img src="" alt="Image description" class="img-fluid">
+                    <img src="\static\Home.png" alt="Image description" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -46,29 +50,29 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>Career Track Courses</h2>
-                <a href="#" class="btn btn-primary">See All</a>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center">
+                        <a class="btn btn-outline-dark mt-auto" href="{% url 'upload_course'%}">Add Course</a>
+                        <a href="{% url 'career_track_courses' %}" class="btn btn-primary">See All</a>
+                    </div>
+                </div>
+                
             </div>
             <div class="row">
                 {% if career_courses %}
                     {% for course in career_courses %}
                     <div class="col-md-3">
-                        <div class="card">
-                            <button class="btn btn-light text-center w-100">
-                            <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ course.title }}</h5>
-                                <p class="card-text">৳ {{ course.price }}</p>
-                                <p class="card-text">Enrolled: {{ course.students_enrolled }}</p>
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'upload_course'%}">Add Course</a></div>
-                                </div>
-                                <div>
-                                    <a href="{% url 'update_course' course.id %}" class="btn btn-primary">Update</a>
-                                    <a href="{% url 'delete_course' course.id %}" class="btn btn-primary">Delete</a>
-                                </div>
-
-                            </div>
-                        </button>
+                        <div class="card h-100">
+                            <a href="{% url 'course_details' course.id %}" class="text-decoration-none">
+                                <button class="btn btn-light text-center w-100">
+                                    <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-start">{{ course.title }}</h5>
+                                        <p class="card-text text-start">৳ {{ course.price }}</p>
+                                        <p class="card-text text-start">Enrolled: {{ course.students_enrolled }}</p>
+                                    </div>
+                                </button>
+                            </a>
                         </div>
                     </div>
                     {% endfor %}
@@ -86,28 +90,28 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>Foundation Courses</h2>
-                <a href="#" class="btn btn-primary">See All</a>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center">
+                        <a class="btn btn-outline-dark mt-auto" href="{% url 'upload_course'%}">Add Course</a>
+                        <a href="{% url 'foundation_courses' %}" class="btn btn-primary">See All</a>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 {% if foundation_courses %}
                     {% for course in foundation_courses %}
                     <div class="col-md-3">
-                        <div class="card">
-                            <button class="btn btn-light text-center w-100">
-                            <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ course.title }}</h5>
-                                <p class="card-text">৳ {{ course.price }}</p>
-                                <p class="card-text">Enrolled: {{ course.students_enrolled }}</p>
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'upload_course'%}">Add Course</a></div>
-                                </div>
-                                <div>
-                                    <a href="{% url 'update_course' course.id %}" class="btn btn-primary">Update</a>
-                                    <a href="{% url 'delete_course' course.id %}" class="btn btn-primary">Delete</a>
-                                </div>
-                            </div>
-                        </button>
+                        <div class="card h-100">
+                            <a href="{% url 'course_details' course.id %}" class="text-decoration-none">
+                                <button class="btn btn-light text-center w-100">
+                                    <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-start">{{ course.title }}</h5>
+                                        <p class="card-text text-start">৳ {{ course.price }}</p>
+                                        <p class="card-text text-start">Enrolled: {{ course.students_enrolled }}</p>
+                                    </div>
+                                </button>
+                            </a>
                         </div>
                     </div>
                     {% endfor %}
@@ -123,29 +127,26 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>Free Courses</h2>
-                <a href="#" class="btn btn-primary">See All</a>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'upload_course'%}">Add Course</a>
+                        <a href="{% url 'free_courses' %}" class="btn btn-primary">See All</a></div>
+                </div>
             </div>
             <div class="row">
                 {% if free_courses %}
                     {% for course in free_courses %}
                     <div class="col-md-3">
-                        <div class="card">
-                            <button class="btn btn-light text-center w-100">
-                            <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ course.title }}</h5>
-                                <p class="card-text">Free</p>
-                                <p class="card-text">Enrolled: {{ course.students_enrolled }}</p>
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'upload_course'%}">Add Course</a></div>
-                                </div>
-                                <div>
-                                    <a href="{% url 'update_course' course.id %}" class="btn btn-primary">Update</a>
-                                    <a href="{% url 'delete_course' course.id %}" class="btn btn-primary">Delete</a>
-                                </div>
-
-                            </div>
-                        </button>
+                        <div class="card h-100">
+                            <a href="{% url 'course_details' course.id %}" class="text-decoration-none">
+                                <button class="btn btn-light text-center w-100">
+                                    <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-start">{{ course.title }}</h5>
+                                        <p class="card-text text-start">৳ {{ course.price }}</p>
+                                        <p class="card-text text-start">Enrolled: {{ course.students_enrolled }}</p>
+                                    </div>
+                                </button>
+                            </a>
                         </div>
                     </div>
                     {% endfor %}
@@ -197,7 +198,7 @@
             <div class="row">
                 {% if categories %}
                     {% for category in categories %}
-                    <div class="col-md-3">
+                    <div class="col-md-3 ">
                         <button class="btn btn-light text-center w-100">
                             {% if category.icon %}
                                 <img src="{{ category.icon.url }}" alt="{{ category.name }}" class="img-fluid mb-2">

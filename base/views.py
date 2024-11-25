@@ -38,15 +38,23 @@ def views_signup(request):
 def views_login(request):
     return render (request,"login.html")  
 
-def views_courses(request):
-    return render (request,"courses.html")  
+def courses(request):
+    courses = Course.objects.all()
+    return render (request,'courses.html',{'courses': courses})  
 
-def course_details(request,id):
-    course = Course.objects.get(pk = id)
+def course_details(request, id):
+    course = Course.objects.get(pk=id)
+    
+    # Fetch related courses based on the category (example)
+    related_courses = Course.objects.filter(category=course.category).exclude(id=course.id)
+
     context = {
-        'course':course,
+        'course': course,
+        'related_courses': related_courses,
     }
-    return render(request,template_name = 'course_details.html',context = context)
+
+    return render(request, 'course_details.html', context)
+
 
 def upload_course(request):
    form = courseForm()
@@ -76,6 +84,28 @@ def delete_course(request,id):
        course.delete()
        return redirect('home')
    return render(request, template_name = 'delete_course.html')
+
+
+
+
+def career_track_courses(request):
+    career_track_category = Category.objects.get(name='Career Track')
+    career_courses = Course.objects.filter(category=career_track_category) 
+    return render(request, 'career_track_courses.html', {'career_courses': career_courses})
+
+def foundation_courses(request):
+    foundation_category = Category.objects.get(name='Foundation')
+
+    foundation_courses = Course.objects.filter(category=foundation_category) 
+    return render(request, 'foundation_courses.html', {'foundation_courses': foundation_courses})
+
+def free_courses(request):
+    free_courses = Course.objects.filter(price=0)  
+    return render(request, 'free_courses.html', {'free_courses': free_courses})
+
+
+
+
 
 
 
