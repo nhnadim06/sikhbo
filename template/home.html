@@ -12,13 +12,13 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">sikhbo.io</a>
-            <form class="d-flex mx-auto">
+            <a class="navbar-brand" href="{% url 'home' %}">sikhbo.io</a>
+            <form class="navbar-form">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline-success" type="submit">Explore</button>
             </form>
-            <div>
-                <a href="login/" class="btn btn-link">Log In</a>
+            <div class="navbar-links">
+                <a href="login/">login</a>
                 <a href="signup/" class="btn btn-primary">Sign Up</a>
             </div>
         </div>
@@ -62,7 +62,7 @@
                 {% if career_courses %}
                     {% for course in career_courses %}
                     <div class="col-md-3">
-                        <div class="card h-100">
+                        <div class="card">
                             <a href="{% url 'course_details' course.id %}" class="text-decoration-none">
                                 <button class="btn btn-light text-center w-100">
                                     <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
@@ -101,7 +101,7 @@
                 {% if foundation_courses %}
                     {% for course in foundation_courses %}
                     <div class="col-md-3">
-                        <div class="card h-100">
+                        <div class="card">
                             <a href="{% url 'course_details' course.id %}" class="text-decoration-none">
                                 <button class="btn btn-light text-center w-100">
                                     <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
@@ -136,7 +136,7 @@
                 {% if free_courses %}
                     {% for course in free_courses %}
                     <div class="col-md-3">
-                        <div class="card h-100">
+                        <div class="card">
                             <a href="{% url 'course_details' course.id %}" class="text-decoration-none">
                                 <button class="btn btn-light text-center w-100">
                                     <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}">
@@ -163,10 +163,10 @@
         <div class="container">
             <h2 class="mb-3">Creative Learning <span class="text-primary">Made Easy</span></h2>
             <ul class="list-unstyled mb-4">
-                <li>✔️ Thousand of creative classes. Beginner to pro.</li>
-                <li>✔️ Taught by creative pros and industry icons.</li>
-                <li>✔️ Learning paths to help you achieve your goals.</li>
-                <li>✔️ Certificates to celebrate your accomplishment.</li>
+                <li>Thousand of creative classes. Beginner to pro.</li>
+                <li>Taught by creative pros and industry icons.</li>
+                <li>Learning paths to help you achieve your goals.</li>
+                <li>Certificates to celebrate your accomplishment.</li>
             </ul>
             <div class="row">
                 <div class="col-md-3">
@@ -198,7 +198,7 @@
             <div class="row">
                 {% if categories %}
                     {% for category in categories %}
-                    <div class="col-md-3 ">
+                    <div class="col-md-3">
                         <button class="btn btn-light text-center w-100">
                             {% if category.icon %}
                                 <img src="{{ category.icon.url }}" alt="{{ category.name }}" class="img-fluid mb-2">
@@ -213,6 +213,7 @@
                     <p>No categories available.</p>
                 {% endif %}
             </div>
+            
             
         </div>
     </section>
