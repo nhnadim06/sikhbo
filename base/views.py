@@ -35,24 +35,22 @@ def views_signup(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        role = request.POST.get('role', 'User')  # Default to User
+        role = request.POST.get('role', 'User')
 
         # Check if the username already exists
         if User.objects.filter(username=username).exists():
-            # Inform the user that the username is taken
             messages.error(request, "Username is already taken.")
             return render(request, "signup.html")
 
         # Create user
         user = User.objects.create_user(username=username, password=password)
 
-        # Check if UserProfile already exists for the user
-        if not hasattr(user, 'userprofile'):
-            # Create UserProfile only if it does not exist
+        # Ensure no duplicate UserProfile creation
+        if not UserProfile.objects.filter(user=user).exists():
             UserProfile.objects.create(user=user, role=role)
 
-        # Redirect to login page after successful signup
-        return redirect('views_login')
+        # Redirect after successful signup
+        return redirect('login')
 
     return render(request, "signup.html")
 
