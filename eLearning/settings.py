@@ -135,3 +135,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory where media files are 
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Redirect to home page after login
+LOGIN_REDIRECT_URL = 'home'
+
+# Redirect to login page if not authenticated
+LOGIN_URL = 'login'
+
+
+CSRF_COOKIE_SECURE = False  # Set to True in production if using HTTPS
+CSRF_COOKIE_HTTPONLY = True  # Helps prevent JavaScript access to the CSRF cookie
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default backend for session storage
+
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Default backend for authentication
+]
+
+AUTH_USER_MODEL = 'auth.User'  # Or your custom user model

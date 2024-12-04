@@ -33,9 +33,13 @@ urlpatterns = [
     path('delete_course/<str:id>',base_views.delete_course,name = 'delete_course'),
     path('signup/', base_views.views_signup,name="signup"),
     path('login/', base_views.views_login,name="login"),
+    path('logout/', base_views.views_logout, name='logout'),
     path('courses/', base_views.courses,name="courses"),
 
     path('career-track-courses/', base_views.career_track_courses, name='career_track_courses'),
     path('foundation-courses/', base_views.foundation_courses, name='foundation_courses'),
     path('free-courses/', base_views.free_courses, name='free_courses'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

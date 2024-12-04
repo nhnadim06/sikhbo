@@ -2,43 +2,26 @@
 <html>
 <head>
     <title>Log In</title>
-    
     {% load static %}
-    <!-- Link to your CSS file -->
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
     <div class="login-container">
         <h1>Log In</h1>
-        <div class="social-login">
-            <a href="#" class="social-button google-button">
-                <i class="fa fa-google"></i> Contine with Google
-            </a>
-            <br>
-            <a href="#"class="social-button facebook-button">
-                <i class="fa fa-facebook"></i> Continue with Facebook
-            </a>
-            
-        </div>
-        <p>OR</p>
-        <form class="login-form">
-            <input type="text" placeholder="Email address or user name" required>
-            <input type="password" placeholder="Password" required>
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
             <div class="forget-pass">
-                <a href="#">Forget your password</a>
+                <a href="#">Forgot your password?</a>
             </div>
             <div class="remember-me-checkbox">
                 <input type="checkbox" id="remember-me">
                 <label for="remember-me">Remember me</label>
             </div>
-            
-            <br>
-            <div class="login-button">
-                <button type="submit">Log in</button>
-                <br>
+            <button type="submit">Log in</button>
         </form>
-        <br>
-        <p>Don't have an account? <a href="#">Sign up</a></p>
     </div>
 </body>
 </html>

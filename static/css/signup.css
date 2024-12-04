@@ -105,3 +105,85 @@ a:hover {
     text-decoration: underline;
    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Form container styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Text heading for the form */
+.enter-email {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Input field styling */
+input[type="text"],
+input[type="password"],
+select {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* Focus state for input fields */
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #4e73df;
+    outline: none;
+}
+
+/* Label styling */
+label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Button styling */
+button {
+    padding: 12px;
+    background-color: #4e73df;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #375aab;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+    }
+}

@@ -10,21 +10,20 @@
 <body>
     <div class="signup-container">
         <h1 class="signup-title">Create an Account</h1>
-        <p class="signup-subtitle">Already have an account? <a href="#">Log in</a></p>
-        <div class="social-login">
-            <a href="#" class="social-button facebook-button">
-                <i class="fa fa-facebook"></i> Continue with Facebook
-            </a>
-            <br>
-            <a href="#" class="social-button google-button">
-                <i class="fa fa-google"></i> Continue with Google
-            </a>
-        </div>
-        <p class="or">OR</p>
-        <form>
-            <p class="enter-email">Enter your email address to create an account</p>
+        <p class="signup-subtitle">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
 
-            <input type="email" placeholder="Your email" required>
+
+        <p class="or">OR</p>
+        <form method="POST">
+            {% csrf_token %}
+            <p class="enter-email">Create your account</p>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <label for="role">Sign up as:</label>
+            <select name="role" id="role">
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+            </select>
             <button type="submit">Create an account</button>
         </form>
     </div>

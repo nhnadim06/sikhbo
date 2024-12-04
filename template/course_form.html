@@ -1,17 +1,16 @@
-
 {% load static %}
-{% block content %}
-
-{% load static %}
-<!-- Link to your CSS file -->
-<link rel="stylesheet" href="{% static 'css/course_form.css' %}">
-<form method = "POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" name="Submit">
-
-
-</form>
-
-{% endblock %}
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Form</title>
+    <link rel="stylesheet" href="{% static 'css/course_form.css' %}">
+</head>
+<body>
+    <h1>{{ "Edit Course" if form.instance.pk else "Create Course" }}</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Course</button>
+    </form>
+</body>
+</html>
