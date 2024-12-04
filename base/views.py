@@ -7,6 +7,9 @@ from .forms import courseForm
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
+from .forms import UserProfileForm  # You need to create this form
+from .models import UserProfile
 
 
 
@@ -20,6 +23,8 @@ def views_home(request):
     free_courses = Course.objects.filter(price=0)
     current_time = datetime.now()
 
+    user_role = request.user.profile.role if request.user.is_authenticated else None    
+
     context = {
         'categories': categories,
         'career_courses': career_courses,
@@ -27,6 +32,8 @@ def views_home(request):
         'free_courses': free_courses,
         'statistics': statistics,
         'current_time': current_time,
+        'user_role': user_role,
+        
     }
     return render(request, 'home.html', context=context)
 
@@ -81,10 +88,16 @@ def courses(request):
     return render(request, 'courses.html', {'courses': courses})
 
 def course_details(request, id):
-    course = Course.objects.get(pk=id)
+    course = get_object_or_404(Course, pk=id)
     related_courses = Course.objects.filter(category=course.category).exclude(id=course.id)
-    context = {'course': course, 'related_courses': related_courses}
+    user_role = request.user.profile.role if request.user.is_authenticated else None
+    context = {
+        'course': course,
+        'related_courses': related_courses,
+        'user_role': user_role,
+    }
     return render(request, 'course_details.html', context)
+
 
 # Admin-only Views
 @login_required
@@ -97,7 +110,7 @@ def upload_course(request):
         form = courseForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('views_home')
+            return redirect('home')
 
     context = {'form': form}
     return render(request, 'course_form.html', context)
@@ -113,7 +126,7 @@ def update_course(request, id):
         form = courseForm(request.POST, request.FILES, instance=course)
         if form.is_valid():
             form.save()
-            return redirect('views_home')
+            return redirect('home')
 
     context = {'form': form}
     return render(request, 'course_form.html', context)
@@ -126,7 +139,7 @@ def delete_course(request, id):
     course = Course.objects.get(pk=id)
     if request.method == 'POST':
         course.delete()
-        return redirect('views_home')
+        return redirect('home')
 
     return render(request, 'delete_course.html')
 
@@ -144,3 +157,43 @@ def foundation_courses(request):
 def free_courses(request):
     free_courses = Course.objects.filter(price=0)
     return render(request, 'free_courses.html', {'free_courses': free_courses})
+
+# Enroll Course
+
+@login_required
+def enroll_course(request, id):
+    course = get_object_or_404(Course, pk=id)
+
+    if request.method == "POST":
+        # Add logic to enroll the user in the course
+        user_profile = request.user.profile
+        # Simulate enrollment (you can store it in a ManyToManyField or a separate model)
+        course.students_enrolled += 1
+        course.save()
+
+        messages.success(request, f"You have successfully enrolled in {course.title}!")
+        return redirect('courses')  # Redirect to courses page or another relevant page
+
+    return render(request, 'enroll_course.html', {'course': course})
+
+@login_required
+def user_profile(request):
+    # Get the profile of the currently logged-in user
+    user_profile = request.user.profile
+
+    # Handle the form submission to update the profile
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your profile has been updated!")
+            return redirect('user_profile')  # Redirect back to profile page after saving
+    else:
+        form = UserProfileForm(instance=user_profile)
+
+    context = {
+        'form': form,
+        'user_profile': user_profile,
+    }
+
+    return render(request, 'user_profile.html', context)    

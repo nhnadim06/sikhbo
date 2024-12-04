@@ -1,16 +1,35 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Course Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if form.instance.pk %}Edit Course{% else %}Create Course{% endif %}</title>
     <link rel="stylesheet" href="{% static 'css/course_form.css' %}">
 </head>
 <body>
-    <h1>{{ "Edit Course" if form.instance.pk else "Create Course" }}</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Course</button>
-    </form>
+    <div class="container">
+        <header>
+            <h1>
+                {% if form.instance.pk %}
+                    Edit Course
+                {% else %}
+                    Create New Course
+                {% endif %}
+            </h1>
+        </header>
+
+        <section>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-button">Save Course</button>
+                </div>
+            </form>
+        </section>
+    </div>
 </body>
 </html>

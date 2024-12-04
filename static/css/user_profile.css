@@ -1,0 +1,51 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flexbox for horizontal layout */
+    justify-content: space-between; /* Align elements to the left and right */
+    align-items: center; /* Vertically center elements */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #170097;
+}
+
+.navbar-form {
+    flex: 1; /* Make the search form flexible to fill available space */
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    border-radius: 5px;
+    border-color: #ced4da;
+    flex: 1; /* Make the search input flexible to fill available space */
+}
+
+.btn-outline-success {
+    border-color: #28a74e;
+    color: #28a74e;
+    margin-left: 10px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #007bff; /* Adjust link color */
+}
+
+.navbar-links .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    margin-left: 15px;
+}

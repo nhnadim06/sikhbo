@@ -35,10 +35,11 @@ urlpatterns = [
     path('login/', base_views.views_login,name="login"),
     path('logout/', base_views.views_logout, name='logout'),
     path('courses/', base_views.courses,name="courses"),
-
+    path('enroll_course/<str:id>/', base_views.enroll_course, name='enroll_course'),
     path('career-track-courses/', base_views.career_track_courses, name='career_track_courses'),
     path('foundation-courses/', base_views.foundation_courses, name='foundation_courses'),
     path('free-courses/', base_views.free_courses, name='free_courses'),
+    path('profile/', base_views.user_profile, name='user_profile'),
 ] 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

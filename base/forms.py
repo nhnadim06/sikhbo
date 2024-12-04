@@ -3,6 +3,13 @@ from .models import *
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .models import UserProfile
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['role']  # Include any other fields you want to allow the user to update
+
 
 
 # SignUpForm
